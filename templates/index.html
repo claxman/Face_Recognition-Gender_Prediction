@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{%block bodyblock %}
+<br>
+<br>
+<div class="container">
+   <div class="jumbotron">
+      <h1 class="display-4">Hello, there!</h1>
+      <p class="lead">A facial recognition system is a technology capable of identifying or verifying a person from a digital image or a video frame from a video source. <em>Source: Wikipedia</em></p>
+      <hr class="my-4">
+      <a class="btn btn-primary btn-lg" href="{{ url_for('gender') }}" role="button">Try it!</a>
+   </div>
+</div>
+{% endblock  %}
+

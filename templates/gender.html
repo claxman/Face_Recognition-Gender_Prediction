@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block bodyblock %}
+<br>
+<br>
+<div class="container">
+   <div class="jumbotron">
+      <form action="#" method="post" enctype="multipart/form-data">
+         <div class="form-group">
+            <label for="exampleFormControlFile1">Upload an Image To Predict</label>
+            <input type="file"  name="image" required="true" class="form-control-file" id="exampleFormControlFile1">
+         </div>
+         <input type="submit" value="upload & predict">
+      </form>
+   </div>
+</div>
+{% if fileupload  %}
+<div class="container">
+   <div class="jumbotron">
+      <div class="row">
+         <div class="col-md-6" id="predict">
+            <img src="{{ url_for('static',filename='uploads/')}}{{ img_name }}" alt="" width="{{ w }}" height="300">
+         </div>
+         <div class="col-md-6" id="predict">
+            <img src="{{ url_for('static',filename='predict/')}}{{ img_name }}" alt="" width="{{ w }}" height="300">
+         </div>
+      </div>
+   </div>
+</div>
+<style>
+   #predict{
+   border: solid;
+   color:#2a004d;
+   text-align: center;
+   }
+</style>
+{% endif %}
+{% endblock %}
+
