@@ -25,20 +25,21 @@ def pipeline_model(path,filename,color='bgr'):
     for x,y,w,h in faces:
         cv2.rectangle(img,(x,y),(x+w,y+h),(255,255,0),2)
         roi = gray[y:y+h,x:x+w]
-        
         roi = roi / 255.0
+		
         if roi.shape[1] > 100:
             roi_resize = cv2.resize(roi,(100,100),cv2.INTER_AREA)
         else:
             roi_resize = cv2.resize(roi,(100,100),cv2.INTER_CUBIC)
+			
         roi_reshape = roi_resize.reshape(1,10000) # 1,-1
         roi_mean = roi_reshape - mean
         eigen_image = model_pca.transform(roi_mean)
         results = model_svm.predict_proba(eigen_image)[0]
         predict = results.argmax() # 0 or 1 
         score = results[predict]
-        text = "%s : %0.2f"%(gender_pre[predict],score)
-        cv2.putText(img,text,(x,y),font,1,(255,255,0),2)
+        text = gender_pre[predict]
+        cv2.putText(img,text,(x,y),font,1,(0,255,0),3)
     
     cv2.imwrite('./static/predict/{}'.format(filename),img)
     
